@@ -137,7 +137,7 @@
     </tr>
     </thead>
     <tbody>
-    <?php $prices1 = []; $idsprices = []; $prodids=[];$prodprices=[]; $prodpricesids=[];?>
+    <?php $prices1 = []; $idsprices = []; $prodids=[];$prodprices=[]; $prodpricesids=[];$prodtitles = [];?>
     @foreach($prices as $price)
         @foreach($price as $pr)
         <?php $prices1[] = $pr->price;
@@ -150,8 +150,9 @@
     unset($prodpricesids);
     unset($prodprices);
     unset($prodidsck);
-    unset($prodids);?>
-        @foreach($order->products as $prod)<?php $prodids[]=$prod->id?>@endforeach
+    unset($prodids);
+    unset($prodtitles)?>
+        @foreach($order->products as $prod)<?php $prodids[]=$prod->id; $prodtitles[] = $prod->title?>@endforeach
         @foreach($order->products as $prod)@foreach($prod->prices as $pric) <?php $prodprices[] = $pric->price; $prodpricesids[]=$prod->id; ?>@endforeach @endforeach
         <?php
         $prodpricesids = array_unique($prodpricesids);
@@ -169,8 +170,8 @@
         <td>{{$order->npo}}</td>
         <td>{{$order->paymentmeth}}</td>
         <td>{{$order->created_at}}</td>
-    <?php $prodidsc = array_count_values($prodids); $c =0; $prodidsck = array_keys($prodidsc); $productprices = [];?>
-        <td>@foreach(array_unique($prodids) as $prods)<a href="/product/{{$prods}}">{{$prods.' '}}@endforeach</a></td>
+    <?php $prodidsc = array_count_values($prodids); $c =0; $prodidsck = array_keys($prodidsc); $productprices = []; $it = 0;?>
+        <td>{{--@foreach(array_unique($prodids) as $prods)<a href="/product/{{$prods}}">{{$prods.' '}}@endforeach</a>--}} <?php $prodids = array_values(array_unique($prodids))?>@foreach(array_unique($prodtitles) as $prodtitles) <a href="/product/{{$prodids[$it]}}">{{$prodtitles.' '}}</a><?php ++$it?>@endforeach</td>
         <td>@foreach(array_unique($prodids) as $prods)<span class="qtyprod">{{$prodidsc[$prodidsck[$c]]}}<?php $productprices[$prods] = $prodidsc[$prodidsck[$c]]?></span> <?php $c++?>@endforeach</td>
 <?php $prc = 0;
 $productprices2=[];
