@@ -40,7 +40,7 @@
                     <span class="icon-euro" style="font-weight: bold;">    </span><span id="euro" style="font-weight: bold;"></span>
                     <span class="icon-dollar" style="font-weight: bold;"></span> <span id="dollar" style="font-weight: bold;"></span>
                 </div>
-                <a href="/"> <span class="icon-home"></span> Home</a>
+                <a href="/"> <span class="icon-home"></span> Домашняя</a>
                 @if(auth()->check())
                     <a class="" href="#"> <span class="icon-user" style="margin-right: 5px;"></span>{{auth()->user()->fname}}</a>
 
@@ -52,7 +52,7 @@
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                            {{ __('Выйти') }}
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -62,14 +62,14 @@
 
 
                 @else
-                    <a class="" href="#"> <span class="icon-user"></span> My Account</a>
+                    <a class="" href="#"> <span class="icon-user"></span> Мой аккаунт</a>
                     @if (Route::has('reg'))
-                        <a href="{{ route('login') }}"><span class="icon-user">Sign In</span> </a>
+                        <a href="{{ route('login') }}"><span class="icon-user">Войти</span> </a>
                     @endif
 
 
                     @if (Route::has('reg'))
-                        <a href="{{route('reg')}}"><span class="icon-user">Sign Up</span>  </a>
+                        <a href="{{route('reg')}}"><span class="icon-user">Зарегистрироваться</span>  </a>
                     @endif
 
 
@@ -78,8 +78,8 @@
 
 
 
-                <a href="contact.html"><span class="icon-envelope"></span> Contact us</a>
-                <a href="/cart"><span class="icon-shopping-cart"></span> {{$prodcount}} Item(s)</a>
+                <a href="contact.html"><span class="icon-envelope"></span> Контакты</a>
+                <a href="/cart"><span class="icon-shopping-cart"></span> {{$prodcount}} Товар(ов)</a>
             </div>
         </div>
     </div>
@@ -96,7 +96,7 @@ Lower Header Section
         <div class="row">
             <div class="span4">
                 <h1>
-                    <a class="logo" href="/"><span>Twitter Bootstrap ecommerce template</span>
+                    <a class="logo" href="/"><span>Магазин</span>
                         <img src="{{URL::asset('img/logo-bootstrap-shoping-cart.png')}}" alt="Shop">
                     </a>
                 </h1>
@@ -105,7 +105,7 @@ Lower Header Section
 
             </div>
             <div class="span4 alignR">
-                <p><br> <strong> Support (24/7) :  <a href="tel:{{env('SUPP_PHONE')}}">{{env('SUPP_PHONE')}} </a></strong><br><br></p>
+                <p><br> <strong> Поддержка (24/7) :  <a href="tel:{{env('SUPP_PHONE')}}">{{env('SUPP_PHONE')}} </a></strong><br><br></p>
                 <span class="btn btn-warning btn-mini">$</span>
             </div>
         </div>
@@ -124,8 +124,8 @@ Lower Header Section
                 </a>
                 <div class="nav-collapse">
                     <ul class="nav">
-                        <li class=""><a href="/">Home	</a></li>
-                        <li class=""><a href="/products">All products</a></li>
+                        <li class=""><a href="/">Домашняя	</a></li>
+                        <li class=""><a href="/products">Все товары</a></li>
                         <li class=""><a href="https://sharij.net">Новости</a></li>
 
                     </ul>
@@ -145,22 +145,22 @@ Lower Header Section
     <div class="row">
         <div class="span12">
             <ul class="breadcrumb">
-                <li><a href="/">Home</a> <span class="divider">/</span></li>
-                <li class="active">Check Out</li>
+                <li><a href="/">Домашняя</a> <span class="divider">/</span></li>
+                <li class="active">Корзина</li>
             </ul>
             <div class="well well-small">
-                <h1>Check Out <small class="pull-right">@if($prodcount==1) {{$prodcount}} item @else {{$prodcount}} items @endif are in the cart </small></h1>
+                <h1>Корзина <small class="pull-right">@if($prodcount==1) {{$prodcount}} товар @else {{$prodcount}} товаров @endif в корзине </small></h1>
                 <hr class="soften"/>
 
                 <table class="table table-bordered table-condensed">
                     <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Description</th>
-                        <th>Avail.</th>
-                        <th>Unit price</th>
-                        <th>Qty </th>
-                        <th>Total</th>
+                        <th>Товар</th>
+                        <th>Описание</th>
+                        <th>Доступно.</th>
+                        <th>Цена(шт)</th>
+                        <th>Количество </th>
+                        <th>Итого по товару</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -189,7 +189,7 @@ Lower Header Section
                                 <input type="hidden" value="1" class="qtyhid" name="cartqtyhid[]">
                                 <input class="span1 cartqty" name="qty[{{$i->id}}]" style="width: 100px;"  size="16" type="number" min="1" max="{{$i->items_available}}" value="1" onchange="qtyproc()">
 
-                            <a href="/deletefromcart/{{$iter}}" class="shopBtn">Delete</a>
+                            <a href="/deletefromcart/{{$iter}}" class="shopBtn">Удалить</a>
                         </td>
                         <td class="totalproduct">
                             @foreach($i->prices as $price){{'$'.$price['price']}}@endforeach
@@ -200,7 +200,7 @@ Lower Header Section
 @endforeach
                     @endforeach
                     <tr>
-                        <td colspan="6" class="alignR">Total products:	</td>
+                        <td colspan="6" class="alignR">Итого:	</td>
                         <td id="totprod"> {{'$'.array_sum($prices)}}</td>
                     </tr>
                     </tbody>
@@ -265,11 +265,11 @@ Lower Header Section
                     </tr>
                     </tbody>
                 </table>
-                <a href="/products" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
+                <a href="/products" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Продолжить покупки </a>
                 @if(!auth()->check())
-                <a href="/login" class="shopBtn btn-large" style="margin-left: 600px;">Login</a>
+                <a href="/login" class="shopBtn btn-large" style="margin-left: 600px;">Войти</a>
                 @endif
-                <a href="/checkout" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
+
 
             </div>
         </div>
@@ -279,7 +279,7 @@ Lower Header Section
     -->
     <section class="our_client">
         <hr class="soften"/>
-        <h4 class="title cntr"><span class="text">Manufactures</span></h4>
+        <h4 class="title cntr"><span class="text">Бренды</span></h4>
         <hr class="soften"/>
         <div class="row">
             <?php $i =0;

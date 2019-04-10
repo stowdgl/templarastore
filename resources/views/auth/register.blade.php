@@ -6,10 +6,10 @@ Lower Header Section
 
         <div class="span9">
             <ul class="breadcrumb">
-                <li><a href="/">Home</a> <span class="divider">/</span></li>
-                <li class="active">Registration</li>
+                <li><a href="/">Домашняя</a> <span class="divider">/</span></li>
+                <li class="active">Регистрация</li>
             </ul>
-            <h3> Registration</h3>
+            <h3> Регистрация</h3>
             <hr class="soft"/>
             <div class="well">
                 {{--
@@ -17,25 +17,25 @@ Lower Header Section
                 --}}
                 <form class="form-horizontal" action="/register" method="post">
                     @csrf
-                    <h3>Your Personal Details</h3>
+                    <h3>Ваши данные</h3>
                     <div class="control-group">
-                        <label class="control-label">Title <sup>*</sup></label>
+                        <label class="control-label">Пол <sup>*</sup></label>
                         <div class="controls">
                             <select class="span1" name="gender" required style="width: 85px;">
                                 <option value="">-</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="male">Мужской</option>
+                                <option value="female">Женский</option>
                             </select>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="inputFname">First name <sup>*</sup></label>
+                        <label class="control-label" for="inputFname">Имя <sup>*</sup></label>
                         <div class="controls">
                             <input type="text" id="inputFname" placeholder="First Name" name="fname" required>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="inputLname">Last name <sup>*</sup></label>
+                        <label class="control-label" for="inputLname">Фамилия <sup>*</sup></label>
                         <div class="controls">
                             <input type="text" id="inputLname" placeholder="Last Name" name="lname" required>
                         </div>
@@ -47,16 +47,16 @@ Lower Header Section
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Password <sup>*</sup></label>
+                        <label class="control-label">Пароль <sup>*</sup></label>
                         <div class="controls">
                             <input type="password" placeholder="Password" name="pword" required>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Date of Birth <sup>*</sup></label>
+                        <label class="control-label">День рождения <sup>*</sup></label>
                         <div class="controls">
                             <select class="span1" name="days" required>
-                                <option value="">D</option>
+                                <option value="">Д</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -105,7 +105,7 @@ Lower Header Section
                                 <option value="12">12</option>
                             </select>
                             <select class="span1" name="year" style="width: 90px;" required>
-                                <option value="">Y</option>
+                                <option value="">Г</option>
                                 <option value="1929">1929</option>
                                 <option value="1930">1930</option>
                                 <option value="1931">1931</option>
@@ -202,7 +202,7 @@ Lower Header Section
                     </div>
                     <div class="control-group">
                         <div class="controls">
-                            <input type="submit" name="submitAccount" value="Register" class="exclusive shopBtn">
+                            <input type="submit" name="submitAccount" value="Зарегистрироваться" class="exclusive shopBtn">
                         </div>
                     </div>
                 </form>
@@ -216,7 +216,7 @@ Lower Header Section
     -->
     <section class="our_client">
         <hr class="soften"/>
-        <h4 class="title cntr"><span class="text">Manufactures</span></h4>
+        <h4 class="title cntr"><span class="text">Бренды</span></h4>
         <hr class="soften"/>
         <div class="row">
             <?php $i =0;

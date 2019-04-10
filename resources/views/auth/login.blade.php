@@ -8,17 +8,17 @@ Lower Header Section
 
         <div class="span9">
             <ul class="breadcrumb">
-                <li><a href="/">Home</a> <span class="divider">/</span></li>
-                <li class="active">{{ __('Login') }}</li>
+                <li><a href="/">Домашняя</a> <span class="divider">/</span></li>
+                <li class="active">{{ __('Войти') }}</li>
             </ul>
-            <h3> {{ __('Login') }}</h3>
+            <h3> {{ __('Войти') }}</h3>
             <hr class="soft"/>
 
             <div class="row" >
                 <div class="span4">
                     <div class="well">
-                        <h5>CREATE YOUR ACCOUNT</h5><br/>
-                        <a href="/register">Create</a>
+                        <h5>Создать аккаунт</h5><br/>
+                        <a href="/register">Создать</a>
                     </div>
                 </div>
                 <div class="span1"> &nbsp;</div>
@@ -27,7 +27,7 @@ Lower Header Section
                         @if($errors->any())
                             <h4>{{$errors->first()}}</h4>
                         @endif
-                        <h5>ALREADY REGISTERED ?</h5>
+                        <h5>Уже зарегистрированы ?</h5>
                         <form action="{{route('doLogin')}}" method="post">
                             @csrf
                             <div class="control-group">
@@ -37,7 +37,7 @@ Lower Header Section
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="inputPassword">Password</label>
+                                <label class="control-label" for="inputPassword">Пароль</label>
                                 <div class="controls">
                                     <input type="password" class="span3" placeholder="Password" name="pword">
                                 </div>
@@ -46,10 +46,10 @@ Lower Header Section
                                 <div class="controls">
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
+                                            {{ __('Забыли пароль?') }}
                                         </a>
                                     @endif
-                                    <button type="submit" class="defaultBtn">Sign in</button>
+                                    <button type="submit" class="defaultBtn">Войти</button>
 
                                 </div>
                             </div>
@@ -65,7 +65,7 @@ Lower Header Section
     -->
     <section class="our_client">
         <hr class="soften"/>
-        <h4 class="title cntr"><span class="text">Manufactures</span></h4>
+        <h4 class="title cntr"><span class="text">Бренд</span></h4>
         <hr class="soften"/>
         <div class="row">
             <?php $i =0;
