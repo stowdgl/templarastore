@@ -146,6 +146,11 @@
     @endforeach
     @endforeach
     @foreach($orders as $order)
+    <?php   unset($productprices);
+    unset($prodpricesids);
+    unset($prodprices);
+    unset($prodidsck);
+    unset($prodids);?>
         @foreach($order->products as $prod)<?php $prodids[]=$prod->id?>@endforeach
         @foreach($order->products as $prod)@foreach($prod->prices as $pric) <?php $prodprices[] = $pric->price; $prodpricesids[]=$prod->id; ?>@endforeach @endforeach
         <?php
@@ -181,12 +186,12 @@ $productprices2=[];
                     @foreach($order->products as $prod)
                     <input type="hidden" value="{{$prod->id}}" name="ids[{{$prod->id}}]">
                     @endforeach
-                    <select name="proc" class="form-control" id="sel1">
+                    <select name="proc" class="form-control sel1">
                         <option>-</option>
                         <option value="1">Обработано</option>
                         <option value="2">Отменить</option>
                     </select>
-                <button type="submit" id="sel1-btn" class="btn btn-warning">Подтвердить</button>
+                <button type="submit" class="sel1-btn btn btn-warning">Подтвердить</button>
                 </div>
             </form>
         </td>
@@ -250,26 +255,24 @@ $productprices2=[];
         var tr = document.getElementsByClassName('type-color');
         //var select = document.getElementById('sel1');
         //var selectbtn = document.getElementById('sel1-btn');
-        var select = document.querySelector('#sel1');
-        var selectbtn = document.querySelector('#sel1-btn');
-
-console.log(tr);
+        var select = document.querySelectorAll('select.sel1');
+        var selectbtn = document.querySelectorAll('button.sel1-btn');
         for (var i = 0; i < table.length; i++) {
-            console.log(table[i]);
+
             if (table[i].innerText === 'Обработан') {
-                console.log(i, tr[i], i);
+
                 table[i].parentElement.setAttribute('class', 'table-success');
-               // selectbtn.style.display = 'none';
-               // select.style.display = 'none';
-                select.parentNode.removeChild(select);
-                selectbtn.parentNode.removeChild(selectbtn);
+
+
+                select[i].parentNode.removeChild(select[i]);
+                selectbtn[i].parentNode.removeChild(selectbtn[i]);
             }
             if (table[i].innerText === 'Ожидает обработки') {
-                console.log(i, tr[i]);
+
                 table[i].parentElement.setAttribute('class', 'table-info');
             }
             if (table[i].innerText === 'Отменён') {
-                console.log(3, tr[i]);
+
                 table[i].parentElement.setAttribute('class', 'table-danger');
             }
         }
