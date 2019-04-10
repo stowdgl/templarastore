@@ -36,10 +36,9 @@
         <div class="container">
             <div class="alignR">
                 <div class="pull-left socialNw">
-                    <a href="#"><span class="icon-twitter"></span></a>
-                    <a href="#"><span class="icon-facebook"></span></a>
-                    <a href="#"><span class="icon-youtube"></span></a>
-                    <a href="#"><span class="icon-tumblr"></span></a>
+                    <i class="fa fa-ruble"></i><span style="font-weight: bold;">Рубль:</span> <span id="ruble" style="font-weight: bold;"></span>
+                    <span class="icon-euro" style="font-weight: bold;">    </span><span id="euro" style="font-weight: bold;"></span>
+                    <span class="icon-dollar" style="font-weight: bold;"></span> <span id="dollar" style="font-weight: bold;"></span>
                 </div>
                 <a href="/"> <span class="icon-home"></span> Home</a>
                 @if(auth()->check())
@@ -305,12 +304,7 @@ Lower Header Section
                 @endif
                 <div class="span2">
 
-                    <form action="/product/{{lcfirst($manufacturer[$j])}}" method="post">
-                        @csrf
-
-
-                        <button type="submit" style="border:none;"><img alt="" src="{{ URL::asset($img)}}" style="width: 100%"></button>
-                    </form>
+                    <a href="/product/{{lcfirst($manufacturer[$j])}}"><img alt="" src="{{ URL::asset($img)}}" style="width: 100px"></a>
                 </div>
                 <?php $i++; $j++;?>
             @endforeach
@@ -358,5 +352,20 @@ Lower Header Section
 </div><!-- /container -->
 <script src="js/cart.js">
 
+</script>
+<script>
+    fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11').then(function (response) {
+
+        return response.json();
+    }).then(function (resj) {
+        console.log(resj)
+        var dlr = document.getElementById('dollar');
+        var eur = document.getElementById('euro');
+        var rub = document.getElementById('ruble');
+
+        dlr.innerText = (Math.round(resj[0].buy * 100) / 100)+'/'+(Math.round(resj[0].sale * 100) / 100);
+        eur.innerText = (Math.round(resj[1].buy * 100) / 100)+'/'+(Math.round(resj[1].sale * 100) / 100);
+        rub.innerText = (Math.round(resj[2].buy * 100) / 100)+'/'+(Math.round(resj[2].sale * 100) / 100);
+    })
 </script>
 @extends('layouts.footer')

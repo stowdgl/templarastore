@@ -68,12 +68,7 @@ Lower Header Section
                 @endif
                 <div class="span2">
 
-                    <form action="/product/{{lcfirst($manufacturer[$j])}}" method="post">
-                        @csrf
-
-
-                        <button type="submit" style="border:none;"><img alt="" src="{{ URL::asset($img)}}" style="width: 100%"></button>
-                    </form>
+                    <a href="/product/{{lcfirst($manufacturer[$j])}}"><img alt="" src="{{ URL::asset($img)}}" style="width: 100px"></a>
                 </div>
                 <?php $i++; $j++;?>
             @endforeach
