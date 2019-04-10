@@ -232,6 +232,7 @@ Lower Header Section
                                         <input type="text" placeholder="Мобильный телефон" name="phone" required>
                                     </div>
                                 </div>
+                            <br>
                                 <div class="control-group">
                                     <label class="span2 control-label" for="inputEmail">Эл.почта: </label>
                                     <div class="controls">
@@ -244,6 +245,7 @@ Lower Header Section
                                         <input type="text" placeholder="№ Новой Почты" name="npo" required>
                                     </div>
                                 </div>
+                            <br>
                                 <div class="control-group">
                                     <label class="span2 control-label" for="inputEmail">Оплата: </label>
                                     <div class="controls">
@@ -265,7 +267,9 @@ Lower Header Section
                     </tbody>
                 </table>
                 <a href="/products" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Continue Shopping </a>
+                @if(!auth()->check())
                 <a href="/login" class="shopBtn btn-large" style="margin-left: 600px;">Login</a>
+                @endif
                 <a href="/checkout" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
 
             </div>
