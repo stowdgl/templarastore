@@ -12,6 +12,7 @@ class AdminController extends Controller
     //
     public function index()
     {
+
         if (auth()->check())
         {
             if ((auth()->user()->user_type)=='admin'){
@@ -120,8 +121,23 @@ class AdminController extends Controller
 
     }
     public function orderproc(Request $request){
+
         switch ($request['proc']){
             case 1:
+                $ordproducts = Orders::with('products')->where('id',$request['id'])->get();
+                $order_products = [];
+                foreach ($ordproducts as $ordproduct) {
+                    foreach ($ordproduct->products as $product) {
+                        $order_products[] = $product->id;
+                    }
+                }
+                $order_products = array_count_values($order_products);
+                foreach ($order_products as $key=>$order_product) {
+                    $prd = Products::find($key);
+                    $prd->items_available = (intval($prd->items_available)-intval($order_product));
+                    $prd->save();
+                }
+
                 $orders = Orders::find($request['id']);
                 $orders->order_status = 'Обработан';
                 $orders->save();

@@ -131,6 +131,7 @@
         <th scope="col">Товары</th>
         <th scope="col">Количество</th>
         <th scope="col">Цена</th>
+        <th scope="col">Сумма заказа</th>
         <th scope="col">Статус заказа</th>
         <th scope="col">Обработать</th>
     </tr>
@@ -163,11 +164,15 @@
         <td>{{$order->npo}}</td>
         <td>{{$order->paymentmeth}}</td>
         <td>{{$order->created_at}}</td>
-    <?php $prodidsc = array_count_values($prodids); $c =0; $prodidsck = array_keys($prodidsc);?>
+    <?php $prodidsc = array_count_values($prodids); $c =0; $prodidsck = array_keys($prodidsc); $productprices = [];?>
         <td>@foreach(array_unique($prodids) as $prods)<a href="/product/{{$prods}}">{{$prods.' '}}@endforeach</a></td>
-        <td>@foreach(array_unique($prodids) as $prods)<span class="qtyprod">{{$prodidsc[$prodidsck[$c]]}}</span> <?php $c++?>@endforeach</td>
-<?php $prc = 0;?>
-        <td> @for($j = 0;$j<count($prodpricesids);$j++){{"(".$prodpricesids[$j].")".$prodprices[$j]}} @endfor </td>
+        <td>@foreach(array_unique($prodids) as $prods)<span class="qtyprod">{{$prodidsc[$prodidsck[$c]]}}<?php $productprices[$prods] = $prodidsc[$prodidsck[$c]]?></span> <?php $c++?>@endforeach</td>
+<?php $prc = 0;
+$productprices2=[];
+?>
+        <td> @for($j = 0;$j<count($prodpricesids);$j++){{"(".$prodpricesids[$j].")$".$prodprices[$j]}} <?php $productprices2[] = $prodprices[$j]?> @endfor </td>
+        <?php $productprices = array_values($productprices); $productprices2= array_values($productprices2);$i=0;$total = [];?>
+        <td>@foreach($productprices as $productprice)<?php $total[] = $productprice*$productprices2[$i]?> <?php $i++ ?>@endforeach {{'$'.array_sum($total)}}</td>
         <td class="ordstat">{{$order->order_status}}</td>
         <td>
             <form action="/dashboard/order/{{$order->id}}" method="post">
@@ -181,7 +186,7 @@
                         <option value="1">Обработано</option>
                         <option value="2">Отменить</option>
                     </select>
-                <button type="submit" class="btn btn-warning">Подтвердить</button>
+                <button type="submit" id="sel1-btn" class="btn btn-warning">Подтвердить</button>
                 </div>
             </form>
         </td>
@@ -243,13 +248,21 @@
     function ready() {
         var table = document.getElementsByClassName('ordstat');
         var tr = document.getElementsByClassName('type-color');
+        //var select = document.getElementById('sel1');
+        //var selectbtn = document.getElementById('sel1-btn');
+        var select = document.querySelector('#sel1');
+        var selectbtn = document.querySelector('#sel1-btn');
+
 console.log(tr);
         for (var i = 0; i < table.length; i++) {
             console.log(table[i]);
             if (table[i].innerText === 'Обработан') {
                 console.log(i, tr[i], i);
                 table[i].parentElement.setAttribute('class', 'table-success');
-
+               // selectbtn.style.display = 'none';
+               // select.style.display = 'none';
+                select.parentNode.removeChild(select);
+                selectbtn.parentNode.removeChild(selectbtn);
             }
             if (table[i].innerText === 'Ожидает обработки') {
                 console.log(i, tr[i]);
