@@ -247,7 +247,10 @@ Lower Header Section
                                 <div class="control-group">
                                     <label class="span2 control-label" for="inputEmail">Оплата: </label>
                                     <div class="controls">
-                                        <input type="text" placeholder="Оплата" name="paymentmeth" required>
+                                        <select class="form-control" name="paymentmeth" id="exampleFormControlSelect1">
+                                            <option value="Наложенный платеж">Наложеный платеж</option>
+                                            <option value="Безналичный расчет">Безналичный расчет</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="control-group">
