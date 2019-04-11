@@ -23,7 +23,7 @@ Lower Header Section
                             <div class="thumbnail">
                                 <a href="/product/{{$product->id}}" class="overlay"></a>
                                 <a class="zoomTool" href="/product/{{$product->id}}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
-                                <a href="/product/{{$product->id}}"><img src="{{URL::asset($product->product_img)}}" alt=""></a>
+                                <a href="/product/{{$product->id}}"><img src="{{URL::asset($product->product_img)}}" alt="" width="200" height="300"></a>
                                 <div class="caption cntr">
                                     <p>{{$product->title}}</p>
                                     <p><strong> @foreach($product->prices as $price){{'$'.$price['price']}}@endforeach</strong></p>
@@ -82,13 +82,7 @@ Lower Header Section
                     @break;
                 @endif
                 <div class="span2">
-
-                    <form action="/product/{{lcfirst($manufacturer[$j])}}" method="post">
-                        @csrf
-
-
-                        <button type="submit" style="border:none;"><img alt="" src="{{ URL::asset($img)}}" style="width: 100%"></button>
-                    </form>
+                    <a href="/product/{{lcfirst($manufacturer[$j])}}"><img alt="" src="{{ URL::asset($img)}}" style="width: 100px"></a>
                 </div>
                 <?php $i++; $j++;?>
             @endforeach

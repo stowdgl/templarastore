@@ -39,7 +39,7 @@ Lower Header Section
             New Products
             -->
             <div class="well well-small">
-                <h3>New Products </h3>
+                <h3>Новые товары </h3>
                 <hr class="soften"/>
 
                 <div class="row-fluid">
@@ -54,7 +54,7 @@ Lower Header Section
                         <li class="span4">
                             <div class="thumbnail">
 
-                                <a class="zoomTool" href="/product/{{$product->id}}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                                <a class="zoomTool" href="/product/{{$product->id}}" title="add to cart"><span class="icon-search"></span> Просмотр</a>
                                 <a href="/product/{{$product->id}}"><img src="{{ URL::asset($product->product_img)}}" alt=""></a>
                                 <div class="caption cntr">
                                     <p>{{$product->title}}</p>
@@ -62,7 +62,7 @@ Lower Header Section
                                     <form action="/addtocart" method="post">
                                         @csrf
                                         <input type="hidden" value="{{$product->id}}" name="id">
-                                    <h4>@if($product->items_available==0) <button class="shopBtn" href="#" title="" style="background-color:#a39d9d;" disabled="disabled"> NOT AVAILABLE </button>@else<button type="submit" class="shopBtn" title="add to cart">Add to cart</button> @endif</h4>
+                                    <h4>@if($product->items_available==0) <button class="shopBtn" href="#" title="" style="background-color:#a39d9d;" disabled="disabled"> Не доступно </button>@else<button type="submit" class="shopBtn" title="add to cart">Добавить в корзину</button> @endif</h4>
                                     </form>
                                     <div class="actionList">
                                     </div>
@@ -78,13 +78,13 @@ Lower Header Section
             Featured Products
             -->
             <div class="well well-small">
-                <h3><a class="btn btn-mini pull-right" href="products.html" title="View more">VIew More<span class="icon-plus"></span></a> Best Selling Products  </h3>
+                <h3><a class="btn btn-mini pull-right" href="products.html" title="View more">Посмотреть<span class="icon-plus"></span></a> Наиболее продаваемые товары  </h3>
                 <hr class="soften"/>
                 <div class="row-fluid">
                     <ul class="thumbnails">
                         <li class="span4">
                             <div class="thumbnail">
-                                <a class="zoomTool" href="/details" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                                <a class="zoomTool" href="/details" title="add to cart"><span class="icon-search"></span> Просмотр</a>
                                 <a  href="/details"><img src="{{ URL::asset('img/d.jpg')}}" alt=""></a>
                                 <div class="caption">
                                     <h5>Manicure & Pedicure</h5>
@@ -134,7 +134,7 @@ Lower Header Section
     -->
     <section class="our_client">
         <hr class="soften"/>
-        <h4 class="title cntr"><span class="text">Manufactures</span></h4>
+        <h4 class="title cntr"><span class="text">Бренды</span></h4>
         <hr class="soften"/>
         <div class="row">
             <?php $i =0;
@@ -159,12 +159,7 @@ Lower Header Section
                         @endif
             <div class="span2">
 
-                 <form action="/product/{{lcfirst($manufacturer[$j])}}" method="post">
-                    @csrf
-
-
-                     <button type="submit" style="border:none;"><img alt="" src="{{ URL::asset($img)}}" style="width: 100%"></button>
-                </form>
+                <a href="/product/{{lcfirst($manufacturer[$j])}}"><img alt="" src="{{ URL::asset($img)}}" style="width: 100px"></a>
             </div>
                     <?php $i++; $j++;?>
                 @endforeach

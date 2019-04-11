@@ -131,12 +131,13 @@
         <th scope="col">Товары</th>
         <th scope="col">Количество</th>
         <th scope="col">Цена</th>
+        <th scope="col">Сумма заказа</th>
         <th scope="col">Статус заказа</th>
         <th scope="col">Обработать</th>
     </tr>
     </thead>
     <tbody>
-    <?php $prices1 = []; $idsprices = []; $prodids=[];$prodprices=[]; $prodpricesids=[];?>
+    <?php $prices1 = []; $idsprices = []; $prodids=[];$prodprices=[]; $prodpricesids=[];$prodtitles = [];?>
     @foreach($prices as $price)
         @foreach($price as $pr)
         <?php $prices1[] = $pr->price;
@@ -145,7 +146,13 @@
     @endforeach
     @endforeach
     @foreach($orders as $order)
-        @foreach($order->products as $prod)<?php $prodids[]=$prod->id?>@endforeach
+    <?php   unset($productprices);
+    unset($prodpricesids);
+    unset($prodprices);
+    unset($prodidsck);
+    unset($prodids);
+    unset($prodtitles)?>
+        @foreach($order->products as $prod)<?php $prodids[]=$prod->id; $prodtitles[] = $prod->title?>@endforeach
         @foreach($order->products as $prod)@foreach($prod->prices as $pric) <?php $prodprices[] = $pric->price; $prodpricesids[]=$prod->id; ?>@endforeach @endforeach
         <?php
         $prodpricesids = array_unique($prodpricesids);
@@ -163,11 +170,15 @@
         <td>{{$order->npo}}</td>
         <td>{{$order->paymentmeth}}</td>
         <td>{{$order->created_at}}</td>
-    <?php $prodidsc = array_count_values($prodids); $c =0; $prodidsck = array_keys($prodidsc);?>
-        <td>@foreach(array_unique($prodids) as $prods)<a href="/product/{{$prods}}">{{$prods.' '}}@endforeach</a></td>
-        <td>@foreach(array_unique($prodids) as $prods)<span class="qtyprod">{{$prodidsc[$prodidsck[$c]]}}</span> <?php $c++?>@endforeach</td>
-<?php $prc = 0;?>
-        <td> @for($j = 0;$j<count($prodpricesids);$j++){{"(".$prodpricesids[$j].")".$prodprices[$j]}} @endfor </td>
+    <?php $prodidsc = array_count_values($prodids); $c =0; $prodidsck = array_keys($prodidsc); $productprices = []; $it = 0;?>
+        <td>{{--@foreach(array_unique($prodids) as $prods)<a href="/product/{{$prods}}">{{$prods.' '}}@endforeach</a>--}} <?php $prodids = array_values(array_unique($prodids))?>@foreach(array_unique($prodtitles) as $prodtitles) <a href="/product/{{$prodids[$it]}}">{{$prodtitles.' '}}</a><?php ++$it?>@endforeach</td>
+        <td>@foreach(array_unique($prodids) as $prods)<span class="qtyprod">{{$prodidsc[$prodidsck[$c]]}}<?php $productprices[$prods] = $prodidsc[$prodidsck[$c]]?></span> <?php $c++?>@endforeach</td>
+<?php $prc = 0;
+$productprices2=[];
+?>
+        <td> @for($j = 0;$j<count($prodpricesids);$j++){{"(".$prodpricesids[$j].")$".$prodprices[$j]}} <?php $productprices2[] = $prodprices[$j]?> @endfor </td>
+        <?php $productprices = array_values($productprices); $productprices2= array_values($productprices2);$i=0;$total = [];?>
+        <td>@foreach($productprices as $productprice)<?php $total[] = $productprice*$productprices2[$i]?> <?php $i++ ?>@endforeach {{'$'.array_sum($total)}}</td>
         <td class="ordstat">{{$order->order_status}}</td>
         <td>
             <form action="/dashboard/order/{{$order->id}}" method="post">
@@ -176,12 +187,12 @@
                     @foreach($order->products as $prod)
                     <input type="hidden" value="{{$prod->id}}" name="ids[{{$prod->id}}]">
                     @endforeach
-                    <select name="proc" class="form-control" id="sel1">
+                    <select name="proc" class="form-control sel1">
                         <option>-</option>
                         <option value="1">Обработано</option>
                         <option value="2">Отменить</option>
                     </select>
-                <button type="submit" class="btn btn-warning">Подтвердить</button>
+                <button type="submit" class="sel1-btn btn btn-warning">Подтвердить</button>
                 </div>
             </form>
         </td>
@@ -243,20 +254,26 @@
     function ready() {
         var table = document.getElementsByClassName('ordstat');
         var tr = document.getElementsByClassName('type-color');
-console.log(tr);
+        //var select = document.getElementById('sel1');
+        //var selectbtn = document.getElementById('sel1-btn');
+        var select = document.querySelectorAll('select.sel1');
+        var selectbtn = document.querySelectorAll('button.sel1-btn');
         for (var i = 0; i < table.length; i++) {
-            console.log(table[i]);
+
             if (table[i].innerText === 'Обработан') {
-                console.log(i, tr[i], i);
+
                 table[i].parentElement.setAttribute('class', 'table-success');
 
+
+                select[i].parentNode.removeChild(select[i]);
+                selectbtn[i].parentNode.removeChild(selectbtn[i]);
             }
             if (table[i].innerText === 'Ожидает обработки') {
-                console.log(i, tr[i]);
+
                 table[i].parentElement.setAttribute('class', 'table-info');
             }
             if (table[i].innerText === 'Отменён') {
-                console.log(3, tr[i]);
+
                 table[i].parentElement.setAttribute('class', 'table-danger');
             }
         }
