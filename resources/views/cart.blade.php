@@ -127,7 +127,7 @@ Lower Header Section
                     <ul class="nav">
                         <li class=""><a href="/">Домашняя	</a></li>
                         <li class=""><a href="/products">Все товары</a></li>
-                        <li class=""><a href="https://sharij.net">Новости</a></li>
+                        <li class=""><a href="https://sharij.net" target="_blank">Новости</a></li>
 
                     </ul>
                     <form action="#" class="navbar-search pull-left" style="padding-top: 5px; margin-right: 10px;float: right;">

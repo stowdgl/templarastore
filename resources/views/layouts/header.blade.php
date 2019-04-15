@@ -120,7 +120,7 @@
                     <ul class="nav">
                         <li class="active"><a href="/">Домашняя	</a></li>
                         <li class=""><a href="/products">Все товары</a></li>
-                        <li class=""><a href="https://sharij.net">Новости</a></li>
+                        <li class=""><a href="https://sharij.net" target="_blank">Новости</a></li>
                     </ul>
                     <form action="/search" class="navbar-search pull-left">
                         <input type="text" placeholder="Search" name="search" class="search-query span2">

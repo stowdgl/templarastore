@@ -203,7 +203,7 @@ $productprices2=[];
 <br><br><br>
 <hr>
 <div style="margin-bottom: 100px; border-top: 4px solid red;"></div>
-<hr>
+
 <table class="table table-hover">
     <thead>
     <tr>
