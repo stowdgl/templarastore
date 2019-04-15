@@ -16,8 +16,12 @@ class ManufacturerController extends Controller
                 $products1[] = Products::with('categories', 'prices')->where('id', $item)->get();
             }
         }
+
         $prodcount= count($products1);
         $products = Products::with('categories')->where('manufacturer',$request['manufacturer'])->get();
+        if (count($products)==0){
+            abort(404);
+        }
         $prod = Products::with('categories','prices')->get();
         $categories = Categories::with('products')->orderBy('title')->get();
         return view('manufacturer_view',['products'=>$products,'categories'=>$categories,'prod'=>$prod,'prodcount'=>$prodcount]);
