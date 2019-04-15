@@ -12,6 +12,7 @@
 </div>
 <a href="#" class="gotop"><i class="icon-double-angle-up"></i></a>
 <!-- Placed at the end of the document so the pages load faster -->
+
 <script src="{{ URL::asset('js/jquery.js')}}"></script>
 <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
 <script src="{{ URL::asset('js/jquery.easing-1.3.min.js')}}"></script>
