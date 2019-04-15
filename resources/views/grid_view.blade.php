@@ -31,7 +31,7 @@ Lower Header Section
                                         @csrf
                                         <input type="hidden" value="{{$product->id}}" name="id">
                                         <input type="hidden" value="1" name="qty">
-                                        <h4>@if($product->items_available==0) <button class="shopBtn" href="#" title="" style="background-color:#a39d9d;" disabled="disabled"> NOT AVAILABLE </button>@else<button type="submit" class="shopBtn" title="add to cart">Add to cart</button> @endif</h4>
+                                        <h4>@if($product->items_available==0) <button class="shopBtn" href="#" title="" style="background-color:#a39d9d;" disabled="disabled"> НЕ ДОСТУПНО </button>@else<button type="submit" class="shopBtn" title="add to cart">Добавить в корзину</button> @endif</h4>
                                     </form>
                                     <div class="actionList">
                                     </div>

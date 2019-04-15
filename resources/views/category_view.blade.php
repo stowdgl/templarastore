@@ -25,7 +25,7 @@ Lower Header Section
                                         @csrf
                                     <p><strong> @foreach($product->prices as $price){{'$'.$price['price']}}@endforeach</strong></p>
                                     <input type="hidden" name="id" value="{{$product->id}}">
-                                    <h4>@if($product->items_available==0) <button class="shopBtn" href="#" title="" style="background-color:#a39d9d;" disabled="disabled"> NOT AVAILABLE </button>@else<button type="submit" class="shopBtn" title="add to cart">Add to cart</button> @endif</h4>
+                                    <h4>@if($product->items_available==0) <button class="shopBtn" href="#" title="" style="background-color:#a39d9d;" disabled="disabled"> НЕ ДОСТУПНО </button>@else<button type="submit" class="shopBtn" title="add to cart">Добавить в корзину</button> @endif</h4>
                                     <div class="actionList">
 
                                     </div>

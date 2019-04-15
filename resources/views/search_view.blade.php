@@ -27,7 +27,7 @@ Lower Header Section
                                     <div class="caption cntr">
                                         <p>{{$product->title}}</p>
                                         <p><strong> @foreach($product->prices as $price){{$price['price']}}@endforeach</strong></p>
-                                        <h4>@if($product->items_available==0) <a class="shopBtn" href="#" title=""> NOT AVAILABLE </a>@else<a class="shopBtn" href="#" title="add to cart">Добавить в корзину</a> @endif</h4>
+                                        <h4>@if($product->items_available==0) <a class="shopBtn" href="#" title=""> НЕ ДОСТУПНО </a>@else<a class="shopBtn" href="#" title="add to cart">Добавить в корзину</a> @endif</h4>
                                         <div class="actionList">
                                         </div>
                                         <br class="clr">

@@ -1,4 +1,6 @@
 <?php
-var_dump($var);
 
+foreach ($categories as $category) {
+    var_dump($category->parent_id);
+}
 ?>
