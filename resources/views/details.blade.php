@@ -38,28 +38,7 @@ Lower Header Section
                                 </div>
                             </div>
 
-                            <div class="control-group">
-                                <label class="control-label"><span>Color</span></label>
-                                <div class="controls">
-                                    <select class="span11">
-                                        <option>Red</option>
-                                        <option>Purple</option>
-                                        <option>Pink</option>
-                                        <option>Red</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label"><span>Materials</span></label>
-                                <div class="controls">
-                                    <select class="span11">
-                                        <option>Material 1</option>
-                                        <option>Material 2</option>
-                                        <option>Material 3</option>
-                                        <option>Material 4</option>
-                                    </select>
-                                </div>
-                            </div>
+
                             <h4>@foreach($products as $product) {{$product->items_available}} @endforeach items in stock</h4>
                             <p>Nowadays the lingerie industry is one of the most successful business spheres.
                                 Nowadays the lingerie industry is one of ...

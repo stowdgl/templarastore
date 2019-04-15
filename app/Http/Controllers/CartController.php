@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     public function add(Request $request){
+        //$cart = $request->session()->forget('cart');
+        $request->session()->push('cart', [$request['qty'] => $request['id']]);
+       // $cart = $request->session()->get('cart');
 
-    $request->session()->push('cart', [$request['qty'] => $request['id']]);
        return redirect()->back();
     }
     /**
@@ -33,7 +35,7 @@ class CartController extends Controller
         $prodcount= count($products);
         $products1= Products::with('categories','prices')->orderBy('created_at')->get();
 
-        return view('cart',['cart'=>$cart,'products'=>$products,'prodcount'=>$prodcount,'products1'=>$products1,'var'=>var_dump($cart)]);
+        return view('cart',['cart'=>$cart,'products'=>$products,'prodcount'=>$prodcount,'products1'=>$products1]);
     }
 
     /**
@@ -143,16 +145,21 @@ class CartController extends Controller
      */
     public function destroy(Request $request)
     {
+
         $cart = $request->session()->get('cart');
        // var_dump($cart);
         $request->session()->forget('cart');
-        foreach ($cart as $key=>$item) {
-            if ($key==$request['id']){
-                $request->session()->push('cart',$item);
+        foreach ($cart as $cartitem) {
+            foreach ($cartitem as $key=>$item) {
+                //echo "<script>console.log($item)</script>";
+                if ($item==$request['id']){
 
-            }else{
 
+                }else{
+                    $request->session()->push('cart',[$key=>$item]);
+                }
             }
+
         }
 
 //redirect()->back()

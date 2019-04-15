@@ -190,7 +190,7 @@ Lower Header Section
                                 <input type="hidden" value="1" class="qtyhid" name="cartqtyhid[]">
                                 <input class="span1 cartqty" name="qty[{{$i->id}}]" style="width: 100px;"  size="16" type="number" min="1" max="{{$i->items_available}}" value="1" onchange="qtyproc()">
 
-                            <a href="/deletefromcart/{{$iter}}" class="shopBtn">Удалить</a>
+                            <a href="/deletefromcart/{{$i->id}}" class="shopBtn">Удалить</a>
                         </td>
                         <td class="totalproduct">
                             @foreach($i->prices as $price){{'$'.$price['price']}}@endforeach
