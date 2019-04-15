@@ -35,11 +35,12 @@
     <div class="topNav">
         <div class="container">
             <div class="alignR">
-                <div class="pull-left socialNw">
+                <a class="pull-left socialNw">
+
                     <i class="fa fa-ruble"></i><span style="font-weight: bold;">Рубль:</span> <span id="ruble" style="font-weight: bold;"></span>
                     <span class="icon-euro" style="font-weight: bold;">    </span><span id="euro" style="font-weight: bold;"></span>
-                    <span class="icon-dollar" style="font-weight: bold;"></span> <span id="dollar" style="font-weight: bold;"></span>
-                </div>
+                    <span class="icon-dollar" style="font-weight: bold;"></span> <span id="dollar" style="display: none;font-weight: bold;"></span><span id="dollar1" style="font-weight: bold;"></span>
+                </a>
                 <a href="/"> <span class="icon-home"></span> Домашняя</a>
                 @if(auth()->check())
                     <a class="" href="#"> <span class="icon-user" style="margin-right: 5px;"></span>{{auth()->user()->fname}}</a>
@@ -201,7 +202,7 @@ Lower Header Section
                     @endforeach
                     <tr>
                         <td colspan="6" class="alignR">Итого:	</td>
-                        <td id="totprod"> {{'$'.array_sum($prices)}}</td>
+                        <td id="totprod"> ${{array_sum($prices)}}</td>
                     </tr>
                     </tbody>
                 </table><br/>
@@ -211,6 +212,8 @@ Lower Header Section
                     <tr><td>Оформление заказа:</td></tr>
                     <tr>
                         <td>
+
+
 
                                 @csrf
                                 <div class="control-group">
@@ -359,13 +362,27 @@ Lower Header Section
         return response.json();
     }).then(function (resj) {
         console.log(resj)
-        var dlr = document.getElementById('dollar');
+        var dlr1 = document.getElementById('dollar1');
         var eur = document.getElementById('euro');
         var rub = document.getElementById('ruble');
-
-        dlr.innerText = (Math.round(resj[0].buy * 100) / 100)+'/'+(Math.round(resj[0].sale * 100) / 100);
+        var dollar = document.getElementById('dollar');
+        dlr1.innerText = (Math.round(resj[0].buy * 100) / 100)+'/'+(Math.round(resj[0].sale * 100) / 100);
+        dollar.innerText=parseFloat(Math.round(resj[0].buy * 100) / 100);
         eur.innerText = (Math.round(resj[1].buy * 100) / 100)+'/'+(Math.round(resj[1].sale * 100) / 100);
         rub.innerText = (Math.round(resj[2].buy * 100) / 100)+'/'+(Math.round(resj[2].sale * 100) / 100);
+       /* var totprod = document.getElementById('totprod');
+        var amount = document.getElementById('amount');
+        amount.setAttribute('value', (parseFloat(dollar.innerText)*parseFloat(totprod.innerText)));*/
     })
+
+
+valueAmount();
+    //document.addEventListener("DOMContentLoaded", valueAmount);
+    function valueAmount(){
+        var dollar = document.getElementById('dollar');
+        console.log(dollar.innerText);
+
+    }
+
 </script>
 @extends('layouts.footer')

@@ -21,12 +21,15 @@ Lower Header Section
                                 <a href="/product/{{$product->id}}"><img src="{{ URL::asset($product->product_img)}}" alt="" width="207" height="268"></a>
                                 <div class="caption cntr">
                                     <p>{{$product->title}}</p>
-
+                                    <form action="/addtocart" method="post">
+                                        @csrf
                                     <p><strong> @foreach($product->prices as $price){{'$'.$price['price']}}@endforeach</strong></p>
+                                    <input type="hidden" name="id" value="{{$product->id}}">
                                     <h4>@if($product->items_available==0) <button class="shopBtn" href="#" title="" style="background-color:#a39d9d;" disabled="disabled"> NOT AVAILABLE </button>@else<button type="submit" class="shopBtn" title="add to cart">Add to cart</button> @endif</h4>
                                     <div class="actionList">
 
                                     </div>
+                                    </form>
                                     <br class="clr">
                                 </div>
                             </div>

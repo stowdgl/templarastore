@@ -128,15 +128,13 @@ Lower Header Section
                                 </p>
                             </div>
                             <div class="span4 alignR">
-                                <form class="form-horizontal qtyFrm">
+                                <form class="form-horizontal qtyFrm" action="/addtocart" method="post">
+                                    @csrf
                                     <h3>@foreach($product->prices as $price){{'$'.$price['price']}}@endforeach</h3>
                                     <br>
                                     <div class="btn-group">
-                                        <form action="/addtocart">
-                                            <input type="hidden" value="{{$product->id}}{{$product->items_available}}">
-                                           @if($product->items_available==0) <button class="shopBtn" href="#" title="" style="background-color:#a39d9d;" disabled="disabled"> NOT AVAILABLE </button>@else<button type="submit" class="shopBtn" title="add to cart"><span class="icon-shopping-cart"></span> Add to cart</button> @endif
-                                        </form>
-
+                                        <input type="hidden" name="id" value="{{$product->id}}">
+                                        @if($product->items_available==0) <button class="shopBtn" href="#" title="" style="background-color:#a39d9d;" disabled="disabled"> NOT AVAILABLE </button>@else<button type="submit" class="shopBtn" title="add to cart"><span class="icon-shopping-cart"></span> Add to cart</button> @endif
                                     </div>
                                 </form>
                             </div>
@@ -167,7 +165,7 @@ Lower Header Section
                                         <input type="checkbox">  Adds product to compair
                                     </label><br>
                                     <div class="btn-group">
-                                        <a href="product_details.html" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
+                                        <a href="/addtocart" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
                                         <a href="product_details.html" class="shopBtn">VIEW</a>
                                     </div>
                                 </form>
@@ -193,7 +191,7 @@ Lower Header Section
                                         <input type="checkbox">  Adds product to compair
                                     </label><br>
                                     <div class="btn-group">
-                                        <a href="product_details.html" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
+                                        <a href="/addtocart" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
                                         <a href="product_details.html" class="shopBtn">VIEW</a>
                                     </div>
                                 </form>
@@ -222,7 +220,7 @@ Lower Header Section
                                         <input type="checkbox">  Adds product to compair
                                     </label><br>
                                     <div class="btn-group">
-                                        <a href="product_details.html" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
+                                        <a href="/addtocart" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
                                         <a href="product_details.html" class="shopBtn">VIEW</a>
                                     </div>
                                 </form>
@@ -248,7 +246,7 @@ Lower Header Section
                                         <input type="checkbox">  Adds product to compair
                                     </label><br>
                                     <div class="btn-group">
-                                        <a href="product_details.html" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
+                                        <a href="/addtocart" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
                                         <a href="product_details.html" class="shopBtn">VIEW</a>
                                     </div>
                                 </form>
@@ -274,7 +272,7 @@ Lower Header Section
                                         <input type="checkbox">  Adds product to compair
                                     </label><br>
                                     <div class="btn-group">
-                                        <a href="product_details.html" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
+                                        <a href="/addtocart" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
                                         <a href="product_details.html" class="shopBtn">VIEW</a>
                                     </div>
                                 </form>
@@ -300,7 +298,7 @@ Lower Header Section
                                         <input type="checkbox">  Adds product to compair
                                     </label><br>
                                     <div class="btn-group">
-                                        <a href="product_details.html" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
+                                        <a href="/addtocart" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>
                                         <a href="product_details.html" class="shopBtn">VIEW</a>
                                     </div>
                                 </form>

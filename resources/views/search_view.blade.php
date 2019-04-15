@@ -9,7 +9,7 @@ Lower Header Section
             New Products
             -->
             <div class="well well-small">
-                <h3>Our Products </h3>
+                <h3>Наши Товары </h3>
                 <?php $i = 0;?>
 
                 <div class="row-fluid">
@@ -22,12 +22,12 @@ Lower Header Section
                             <li class="span4">
                                 <div class="thumbnail">
                                     <a href="/product/{{$product->id}}" class="overlay"></a>
-                                    <a class="zoomTool" href="/product/{{$product->id}}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                                    <a class="zoomTool" href="/product/{{$product->id}}" title="add to cart"><span class="icon-search"></span> Просмотр</a>
                                     <a href="/product/{{$product->id}}"><img src="{{URL::asset($product->product_img)}}" alt=""></a>
                                     <div class="caption cntr">
                                         <p>{{$product->title}}</p>
                                         <p><strong> @foreach($product->prices as $price){{$price['price']}}@endforeach</strong></p>
-                                        <h4>@if($product->items_available==0) <a class="shopBtn" href="#" title=""> NOT AVAILABLE </a>@else<a class="shopBtn" href="#" title="add to cart">Add to cart</a> @endif</h4>
+                                        <h4>@if($product->items_available==0) <a class="shopBtn" href="#" title=""> NOT AVAILABLE </a>@else<a class="shopBtn" href="#" title="add to cart">Добавить в корзину</a> @endif</h4>
                                         <div class="actionList">
                                         </div>
                                         <br class="clr">
@@ -49,7 +49,7 @@ Lower Header Section
     -->
     <section class="our_client">
         <hr class="soften"/>
-        <h4 class="title cntr"><span class="text">Manufactures</span></h4>
+        <h4 class="title cntr"><span class="text">Бренды</span></h4>
         <hr class="soften"/>
         <div class="row">
             <?php $i =0;

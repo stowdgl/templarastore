@@ -78,7 +78,7 @@ Lower Header Section
             Featured Products
             -->
             <div class="well well-small">
-                <h3><a class="btn btn-mini pull-right" href="products.html" title="View more">Посмотреть<span class="icon-plus"></span></a> Наиболее продаваемые товары  </h3>
+                <h3><a class="btn btn-mini pull-right" href="/products" title="View more">Посмотреть<span class="icon-plus"></span></a> Наиболее продаваемые товары  </h3>
                 <hr class="soften"/>
                 <div class="row-fluid">
                     <ul class="thumbnails">

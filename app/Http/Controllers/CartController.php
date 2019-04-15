@@ -10,7 +10,7 @@ class CartController extends Controller
 {
     public function add(Request $request){
 
-       $request->session()->push('cart',$request['id']);
+    $request->session()->push('cart', [$request['qty'] => $request['id']]);
        return redirect()->back();
     }
     /**
@@ -23,15 +23,16 @@ class CartController extends Controller
 
         $cart = $request->session()->get('cart');
         //$cart1 = var_dump($cart);
-        var_dump($cart);
+        //var_dump($cart);
         $products = [];
         if (isset($cart)) {
-            foreach ($cart as $item) {
+            foreach ($cart as $key=>$item) {
                 $products[] = Products::with('categories', 'prices')->where('id', $item)->get();
             }
         }
         $prodcount= count($products);
         $products1= Products::with('categories','prices')->orderBy('created_at')->get();
+
         return view('cart',['cart'=>$cart,'products'=>$products,'prodcount'=>$prodcount,'products1'=>$products1,'var'=>var_dump($cart)]);
     }
 
@@ -53,6 +54,8 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+
+       // return view('test',['req'=>file_get_contents("php://input")]);
         $cart = $request->session()->get('cart');
 
 
@@ -92,6 +95,7 @@ class CartController extends Controller
             }
 //,['product_qty'=>$item]
         }
+
        $request->session()->forget('cart');
         //return view('completed-order',['order'=>$order['id'],'cart'=>$orders]);
         return redirect('/');
