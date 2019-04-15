@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>{{env('APP_NAME')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Store">
+    <meta name="author" content="stowdgl&neoncas">
     <!-- Bootstrap styles -->
     <script>
 
