@@ -36,7 +36,7 @@
         <div class="container">
             <div class="alignR">
                 <a class="pull-left socialNw">
-                    <i class="fa fa-ruble"></i><span style="font-weight: bold;">Рубль:</span> <span id="ruble" style="font-weight: bold;"></span>
+                    <i class="fa fa-ruble"></i><span style="font-weight: bold;">&#8381;</span> <span id="ruble" style="font-weight: bold;"></span>
                     <span class="icon-euro" style="font-weight: bold;">    </span><span id="euro" style="font-weight: bold;"></span>
                     <span class="icon-dollar" style="font-weight: bold;"></span> <span id="dollar" style="font-weight: bold;"></span>
                 </a>
