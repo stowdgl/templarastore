@@ -28,8 +28,8 @@ class ProductController extends Controller
         $products= Products::with('categories','prices')->orderBy('created_at')->paginate(10);
         $newproducts = Products::with('categories','prices')->orderBy('created_at','desc')->take(3)->get();
         $categories = Categories::with('products')->orderBy('title')->get();
-
-        return view('app',['categories'=>$categories,'products'=>$products,'new_products'=>$newproducts,'prodcount'=>$prodcount]);
+       // $categ = Categories::with('children')->where('parent_id','<>','NULL')->get();
+        return view('app',['categories'=>$categories,'products'=>$products,'new_products'=>$newproducts,'prodcount'=>$prodcount/*,'categ'=>$categ*/]);
     }
 
     /**

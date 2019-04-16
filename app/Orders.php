@@ -12,4 +12,7 @@ class Orders extends Model
     public function products(){
         return $this->belongsToMany('App\Products');
     }
+    public function users(){
+        return $this->belongsToMany('App\User');
+    }
 }

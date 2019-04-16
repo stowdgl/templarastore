@@ -34,7 +34,7 @@ Lower Header Section
                             <div class="control-group">
                                 <label class="control-label"><span>@foreach($products[0]->prices as $product){{'$'.$product['price']}}@endforeach</span></label>
                                 <div class="controls">
-                                    <input type="number" class="span6" placeholder="Qty." min="1" max=@foreach($products as $product)"{{$product->items_available}}"@endforeach>
+                                    <input type="number" class="span6" placeholder="Qty." name="qty" min="1" max=@foreach($products as $product)"{{$product->items_available}}"@endforeach>
                                 </div>
                             </div>
 

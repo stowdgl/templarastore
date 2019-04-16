@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Categories;
+use App\Orders;
 use Illuminate\Http\Request;
 use App\Products;
 class LoginController extends Controller
@@ -44,17 +45,24 @@ class LoginController extends Controller
         return redirect()->to('/');
     }
     public function account(Request $request){
-        $cart = $request->session()->get('cart');
 
-        $products = [];
-        if (isset($cart)) {
-            foreach ($cart as $item) {
-                $products[] = Products::with('categories', 'prices')->where('id', $item)->get();
+        if (auth()->check()) {
+            $cart = $request->session()->get('cart');
+
+            $products = [];
+            if (isset($cart)) {
+                foreach ($cart as $item) {
+                    $products[] = Products::with('categories', 'prices')->where('id', $item)->get();
+                }
             }
+            $prodcount = count($products);
+            $products1= Products::with('categories','prices')->orderBy('created_at')->get();
+            $products = Products::with('categories', 'prices')->orderBy('created_at')->paginate(10);
+            $categories = Categories::with('products')->orderBy('title')->get();
+            $orders = Orders::with('products','users')->orderBy('created_at','desc')->get();
+            return view('account', ['prodcount' => $prodcount, 'categories' => $categories, 'products' => $products,'products1'=>$products1,'orders'=>$orders]);
+        }else{
+            abort(404);
         }
-        $prodcount= count($products);
-        $products= Products::with('categories','prices')->orderBy('created_at')->paginate(10);
-        $categories = Categories::with('products')->orderBy('title')->get();
-        return view('auth.account',['prodcount'=>$prodcount,'categories'=>$categories,'products'=>$products]);
     }
 }

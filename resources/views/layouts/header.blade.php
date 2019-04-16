@@ -142,9 +142,8 @@
                     @foreach($categories as $category)
                         <li><a href="/category/{{$category->id}}"><span class="icon-chevron-right"></span>{{$category->title}}</a></li>
                     @endforeach
-                    <li style="border:0"> </li>
-                    <li><a class="totalInCart" href="/cart"></a>
-                    </li>
+
+
                 </ul>
             </div>
 

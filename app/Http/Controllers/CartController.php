@@ -97,6 +97,10 @@ class CartController extends Controller
             }
 //,['product_qty'=>$item]
         }
+        if (auth()->check()){
+            $orders->users()->attach(auth()->user()->id);
+        }
+
 
        $request->session()->forget('cart');
         //return view('completed-order',['order'=>$order['id'],'cart'=>$orders]);

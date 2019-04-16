@@ -25,6 +25,15 @@
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="{{ URL::asset('ico/favicon.ico')}}">
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
 
@@ -145,136 +154,96 @@ Lower Header Section
     -->
     <div class="row">
         <div class="span12">
-            <ul class="breadcrumb">
-                <li><a href="/">Домашняя</a> <span class="divider">/</span></li>
-                <li class="active">Корзина</li>
-            </ul>
-            <div class="well well-small">
-                <h1>Корзина <small class="pull-right">@if($prodcount==1) {{$prodcount}} товар @else {{$prodcount}} товаров @endif в корзине </small></h1>
-                <hr class="soften"/>
+    <table class="table table-bordered table-condensed" style="border-right: 1px solid black;">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">ФИО</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Город</th>
+            <th scope="col">Номер телефона</th>
+            <th scope="col">Номер почты</th>
+            <th scope="col">Способ оплаты</th>
+            <th scope="col">Заказ создан</th>
+            <th scope="col">Товары</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Сумма заказа</th>
+            <th scope="col">Статус заказа</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php $flag = true;?>
+        @foreach($orders as $order)
 
-                <table class="table table-bordered table-condensed">
-                    <thead>
-                    <tr>
-                        <th>Товар</th>
-                        <th>Описание</th>
-                        <th>Доступно.</th>
-                        <th>Цена(шт)</th>
-                        <th>Количество </th>
-                        <th>Итого по товару</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <script>var i =0;</script>
-                    <?php $prod = []; $iter=0;?>
-                    @foreach($products as $product)
-                      <?php $prod[] = $product?>
-                        @endforeach
-                    <?php $prices = [];?>
-                    @foreach($prod as $item)
-                    @foreach($item as $i)
-                        <?php $pr = 0;
-                            $iter++;
+                @foreach($order->users as $users)
+                @if($users->id == auth()->user()->id)  {{-- если юзер в промежуточной таблице равен нынешнему юзеру, то показываем инфу--}}
+
+
+                <tr >
+                    <th scope="row">{{$order->id}}</th>
+                    <td>{{$order->fio}}</td>
+                    <td>{{$order->email}}</td>
+                    <td>{{$order->city}}</td>
+                    <td>{{$order->phone}}</td>
+                    <td>{{$order->npo}}</td>
+                    <td>{{$order->paymentmeth}}</td>
+                    <td>{{$order->created_at}}</td>
+                    <?php
+                    $productsTitles = []; // пустой массив для названий товаров
+                    $productsIDs = []; // пустой массив для ID товаров
+                    $productsPrices = []; // пустой массив для цен товаров
+                    ?>
+                    @foreach($order->products as $products)
+                        <?php
+                        $productsTitles[]=$products->title; // заполняем массив названиями товаров
+                        $productsIDs[] = $products->id; // заполняем массиив ID товаров
                         ?>
-
-                        @foreach($i->prices as $price)<?php  $pr=$price['price']; $prices[] = $price['price'];?> @endforeach
-                    {{--{{var_dump($prod)}}--}}
-                        <form class="form-horizontal" action="/checkout" method="post">
-                    <tr>
-
-                        <td><img width="100" src="{{URL::asset($i->product_img)}}" alt=""></td>
-                        <td>{{$i->title}}<br><br></td>
-                        <td><span class="shopBtn" style="vertical-align: center;text-align: center"><span class="icon-ok"></span></span> </td>
-                        <td class="price">@foreach($i->prices as $price){{'$'.$price['price']}}@endforeach  </td>
-                        <td>
-                                <input type="hidden" value="1" class="qtyhid" name="cartqtyhid[]">
-                                <input class="span1 cartqty" name="qty[{{$i->id}}]" style="width: 100px;"  size="16" type="number" min="1" max="{{$i->items_available}}" value="1" onchange="qtyproc()">
-
-                            <a href="/deletefromcart/{{$i->id}}" class="shopBtn">Удалить</a>
-                        </td>
-                        <td class="totalproduct">
-                            @foreach($i->prices as $price){{'$'.$price['price']}}@endforeach
-
-                        </td>
-                    </tr>
-
-@endforeach
+                        @foreach($products->prices as $prices)
+                            <?php
+                            $productsPrices[] = $prices->price; // заполняем массив ценами товаров
+                            ?>
+                        @endforeach
                     @endforeach
-                    <tr>
-                        <td colspan="5" class="alignR">Итого:	</td>
-                        <td id="totprod"> ${{array_sum($prices)}}</td>
-                    </tr>
-                    </tbody>
-                </table><br/>
+                    <?php
+                    $i = 0; // создаем итератор для ID товаров
+                    ?>
+                    <td> @foreach(array_values(array_unique($productsTitles)) as $productTitle)
+                            <a href="/product/{{$productsIDs[$i]}}">{{($i+1).') '.$productTitle }}</a> <!-- показываем товары и ссылки на них  -->
+                            <?php $i++;?>
+                        @endforeach </td>
+                    <td>
+                        @foreach(array_count_values($productsTitles) as $title=>$productQuantity)
+                            {{$productQuantity }} <!-- показываем количество заказанного товара-->
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach(array_values(array_unique($productsPrices)) as $prices)
+                            {{'$'.$prices }} <!-- показываем цены за ЕДИНИЦУ товара-->
+                        @endforeach
+                    </td>
+                    <?php
+                    $i = 0;
+                    $pricePerItem = [];
+                    ?>
+                    @foreach(array_values(array_unique($productsPrices)) as $qty)
+                        <?php
+                        $pricePerItem[] = $qty*array_values(array_count_values($productsTitles))[$i];
+                        ?>
+                        <?php $i++;?>
+                    @endforeach
+                    <td>
+                        {{'$'.array_sum($pricePerItem)}} <!-- показываем итоговую цену заказа-->
+                    </td>
+                    <td>{{$order->order_status}}</td>
+                </tr>
 
-                <table class="table table-bordered">
-                    <tbody>
-                    <tr><td>Оформление заказа:</td></tr>
-                    <tr>
-                        <td>
+                    @endif
+                @endforeach
 
-
-
-                                @csrf
-                                <div class="control-group">
-                                    <label class="span2 control-label" for="inputEmail">ФИО: </label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="ФИО" name="fio" required>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="span2 control-label" for="inputEmail">Город: </label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="Город" name="city" required>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="span2 control-label" for="inputEmail">Мобильный телефон: </label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="Мобильный телефон" name="phone" required>
-                                    </div>
-                                </div>
-                            <br>
-                                <div class="control-group">
-                                    <label class="span2 control-label" for="inputEmail">Эл.почта: </label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="Эл.почта" name="email" required>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="span2 control-label" for="inputEmail">Номер отделения Новой Почты: </label>
-                                    <div class="controls">
-                                        <input type="text" placeholder="№ Новой Почты" name="npo" required>
-                                    </div>
-                                </div>
-                            <br>
-                                <div class="control-group">
-                                    <label class="span2 control-label" for="inputEmail">Оплата: </label>
-                                    <div class="controls">
-                                        <select class="form-control" name="paymentmeth" id="exampleFormControlSelect1">
-                                            <option value="Наложенный платеж">Наложеный платеж</option>
-                                            <option value="Безналичный расчет">Безналичный расчет</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <input type="submit" class="shopBtn" value="Заказ подтверждаю" name="submit">
-                                    </div>
-                                </div>
-
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <a href="/products" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Продолжить покупки </a>
-                @if(!auth()->check())
-                <a href="/login" class="shopBtn btn-large" style="margin-left: 600px;">Войти</a>
-                @endif
-
-
-            </div>
+            @endforeach
+        </tbody>
+    </table>
         </div>
     </div>
     <!--
@@ -370,13 +339,13 @@ Lower Header Section
         dollar.innerText=parseFloat(Math.round(resj[0].buy * 100) / 100);
         eur.innerText = (Math.round(resj[1].buy * 100) / 100)+'/'+(Math.round(resj[1].sale * 100) / 100);
         rub.innerText = (Math.round(resj[2].buy * 100) / 100)+'/'+(Math.round(resj[2].sale * 100) / 100);
-       /* var totprod = document.getElementById('totprod');
-        var amount = document.getElementById('amount');
-        amount.setAttribute('value', (parseFloat(dollar.innerText)*parseFloat(totprod.innerText)));*/
+        /* var totprod = document.getElementById('totprod');
+         var amount = document.getElementById('amount');
+         amount.setAttribute('value', (parseFloat(dollar.innerText)*parseFloat(totprod.innerText)));*/
     })
 
 
-valueAmount();
+    valueAmount();
     //document.addEventListener("DOMContentLoaded", valueAmount);
     function valueAmount(){
         var dollar = document.getElementById('dollar');
@@ -386,3 +355,4 @@ valueAmount();
 
 </script>
 @extends('layouts.footer')
+
