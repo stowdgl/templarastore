@@ -16,6 +16,7 @@
 <script src="{{ URL::asset('js/jquery.js')}}"></script>
 <script src="{{ URL::asset('js/bootstrap.min.js')}}"></script>
 <script src="{{ URL::asset('js/jquery.easing-1.3.min.js')}}"></script>
+<script src="{{ URL::asset('js/plugin.js')}}"></script>
 <script src="{{ URL::asset('js/jquery.scrollTo-1.4.3.1-min.js')}}"></script>
 <script src="{{ URL::asset('js/shop.js')}}"></script>
 </body>

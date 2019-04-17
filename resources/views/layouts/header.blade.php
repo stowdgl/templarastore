@@ -27,7 +27,9 @@
     <link rel="shortcut icon" href="{{ URL::asset('ico/favicon.ico')}}">
 </head>
 <body>
-
+<div id="preloader">
+    <div class="dws-progress-bar"></div>
+</div>
 <!--
 	Upper Header Section
 -->
